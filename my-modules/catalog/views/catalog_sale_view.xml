@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="catalog_sale_tree_view" model="ir.ui.view">
+        <field name="name">订单管理</field>
+        <field name="model">catalog.sale</field>
+        <field name="arch" type="xml">
+            <tree string="order">
+                <field name="com_name"/>
+                <field name="date_order"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="catalog_sale_form_view" model="ir.ui.view">
+        <field name="name">订单管理</field>
+        <field name="model">catalog.sale</field>
+        <field name="arch" type="xml">
+            <form string="order">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="com_name"/>
+                        </group>
+                        <group>
+                            <field name="date_order"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="订单行" name="order_lines">
+                            <fields
+                                name="name"
+                                widget="section_and_note_one2many"
+                                mode="tree,kanban"/>
+                            <form>
+
+                            </form>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="catalog_sale_act_window" model="ir.actions.act_window">
+        <field name="name">订单管理</field>
+        <field name="res_model">catalog.sale</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

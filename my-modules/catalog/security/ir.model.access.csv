@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_catalog_product_group_user,catalog.product,model_catalog_product,base.group_user,1,1,1,1
+access_catalog_deal_group_user,catalog.deal,model_catalog_deal,base.group_user,1,1,1,1
+access_catalog_provider_group_user,catalog.provider,model_catalog_provider,base.group_user,1,1,1,1
+access_catalog_client_group_user,catalog.client,model_catalog_client,base.group_user,1,1,1,1
+access_catalog_sale_group_user,catalog.sale,model_catalog_sale,base.group_user,1,1,1,1

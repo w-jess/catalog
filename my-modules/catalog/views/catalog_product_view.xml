@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="catalog_product_tree_view" model="ir.ui.view">
+        <field name="name">产品列表</field>
+        <field name="model">catalog.product</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="provider_name"/>
+                <field name="brand"/>
+                <field name="barcode"/>
+                <field name="spec"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="catalog_product_form_view" model="ir.ui.view">
+        <field name="name">产品列表</field>
+        <field name="model">catalog.product</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="provider_name"/>
+                            <field name="brand"/>
+                        </group>
+                        <group>
+                            <field name="spec"/>
+                            <field name="provider_site"/>
+                            <field name="barcode"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="catalog_product_act_window" model="ir.actions.act_window">
+        <field name="name">产品列表</field>
+        <field name="res_model">catalog.product</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>

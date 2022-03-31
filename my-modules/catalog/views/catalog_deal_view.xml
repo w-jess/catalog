@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="catalog_deal_tree_view" model="ir.ui.view">
+        <field name="name">库存列表</field>
+        <field name="model">catalog.deal</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="provider_name"/>
+                <field name="brand"/>
+                <field name="barcode"/>
+                <field name="spec"/>
+                <field name="cost"/>
+                <field name="shipping"/>
+                <field name="quantity"/>
+                <field name="create_user_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="catalog_deal_form_view" model="ir.ui.view">
+        <field name="name">库存列表</field>
+        <field name="model">catalog.deal</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="provider_name"/>
+                            <field name="brand"/>
+                            <field name="provider_site"/>
+                            <field name="barcode"/>
+                        </group>
+                        <group>
+                            <field name="spec"/>
+                            <field name="cost"/>
+                            <field name="shipping"/>
+                            <field name="quantity"/>
+                            <field name="create_user_id"/>
+                        </group>
+                    </group>
+                    <notebook>
+                                <page string="说明">
+                                    <field name="note"/>
+                                </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!--<record id="catalog_deal_search_view" model="ir.ui.view">-->
+        <!--<field name="name">搜索</field>-->
+        <!--<field name="model">catalog_deal</field>-->
+        <!--<field name="arch" type="xml">-->
+            <!--<search>-->
+                <!--<field name="name"/>-->
+                <!--<field name="barcode"/>-->
+                <!--<group expand="1">-->
+                    <!--<filter string="操作人" name="create_user_id" context="{'group_by': 'create_user_id'}"/>-->
+                <!--</group>-->
+            <!--</search>-->
+        <!--</field>-->
+    <!--</record>-->
+
+    <record id="catalog_deal_act_window" model="ir.actions.act_window">
+        <field name="name">库存列表</field>
+        <field name="res_model">catalog.deal</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>
