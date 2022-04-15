@@ -4,9 +4,12 @@
         <field name="name">订单管理</field>
         <field name="model">catalog.sale</field>
         <field name="arch" type="xml">
-            <tree string="order">
-                <field name="com_name"/>
-                <field name="date_order"/>
+            <tree string="order" >
+                <field name="o_name" string="报价单号"/>
+                <field name="com_name_id" string="客户"/>
+                <field name="date_order" string="创建日期"/>
+                <field name="create_user_id"/>
+                <field name="state" invisible="1" string="状态"/>
             </tree>
         </field>
     </record>
@@ -16,10 +19,49 @@
         <field name="model">catalog.sale</field>
         <field name="arch" type="xml">
             <form string="order">
+                <header>
+                    <button name="action_catalog_picking" string="生成出货单" type="object" states="sale" class="btn-primary"/>
+                    <button name="action_done" string="完成" type="object" states="sale" class="btn-primary"/>
+
+                    <button name="action_quotation_send" string="发送邮件" type="object" states="draft" class="btn-primary"/>
+                    <button name="action_quotation_send" type="object" string="Send PRO-FORMA Invoice"
+                      groups="sale.group_proforma_sales" class="btn-primary"
+                      attrs="{'invisible': [('state', '!=', 'draft')]}"/>
+                    <button name="action_confirm" id="action_confirm"
+                        string="确认" class="btn-primary" type="object"
+                        attrs="{'invisible': [('state', 'not in', ['sent'])]}"/>
+                    <button name="action_confirm"
+                        string="确认" type="object"
+                        attrs="{'invisible': [('state', 'not in', ['draft'])]}"/>
+                    <!--<button name="action_quotation_send" type="object" string="Send PRO-FORMA Invoice" groups="sale.group_proforma_sales" attrs="{'invisible': ['|', ('state', '=', 'draft'), ('invoice_count','&gt;=',1)]}" context="{'proforma': True}"/>-->
+                    <!--<button name="action_quotation_send" string="Send by Email" type="object" states="sent,sale"/>-->
+                    <button name="action_cancel" states="draft,sent,sale" type="object" string="取消"/>
+                    <button name="action_draft" states="cancel" type="object" string="Set to Quotation"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,sent,sale,done"/>
+                </header>
                 <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="preview_sale_order" icon="fa-calendar"
+                            type="object"
+                            class="oe_stat_button">
+                            <div class="o_stat_info">
+                                <span class="o_stat_text">库存</span>
+                                <span class="o_stat_text">查询</span>
+                            </div>
+                        </button>
+                        <field name="picking_ids" invisible="1" on_change="1" modifiers="{'invisible':true}"/>
+			            <button type="object" name="action_view_delivery" class="oe_stat_button" icon="fa-truck" attrs="{'invisible': [('delivery_count', '=', 0)]}" modifiers="{'invisible':[['delivery_count','=',0]]}" options="{}">
+			                <field name="delivery_count" widget="statinfo" string="交货" modifiers="{'readonly':true}"/>
+			            </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="o_name" readonly="1"/>
+                        </h1>
+                    </div>
                     <group>
                         <group>
-                            <field name="com_name"/>
+                            <field name="com_name_id"/>
                         </group>
                         <group>
                             <field name="date_order"/>
@@ -27,17 +69,51 @@
                     </group>
                     <notebook>
                         <page string="订单行" name="order_lines">
-                            <fields
-                                name="name"
-                                widget="section_and_note_one2many"
-                                mode="tree,kanban"/>
-                            <form>
-
-                            </form>
+                            <field name="sale_line_ids">
+                                <!--<tree editable="bottom">-->
+                                <tree>
+                                    <field name="sale_name"/>
+                                    <field name="quantity"/>
+                                    <field name="unit"/>
+                                    <field name="total" readonly="1" force_save = "1"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <group>
+                                            <field name="sale_id" readonly="1"/>
+                                            <field name="sale_name"/>
+                                        </group>
+                                        <group>
+                                            <field name="quantity"/>
+                                            <field name="unit"/>
+                                            <field name="total" readonly="1" force_save = "1"/>
+                                        </group>
+                                    </group>
+                                </form>
+                            </field>
                         </page>
                     </notebook>
                 </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
             </form>
+        </field>
+    </record>
+
+    <record id="catalog_sale_search_view" model="ir.ui.view">
+        <field name="name">订单</field>
+        <field name="model">catalog.sale</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="create_user_id"/>
+                <filter string="订单" name="sta" domain="['|', ('state','=','sale'),('state','=','done')]"/>
+                <filter string="报价单" name="stat" domain="['|', ('state','=','draft'),('state','=','sent')]"/>
+                <group expand="1">
+                    <filter string="客户" name="com" context="{'group_by': 'com_name_id'}"/>
+                </group>
+            </search>
         </field>
     </record>
 
@@ -45,5 +121,13 @@
         <field name="name">订单管理</field>
         <field name="res_model">catalog.sale</field>
         <field name="view_mode">tree,form</field>
+        <field name="context">{'search_default_com': True, 'search_default_sta': True}</field>
+    </record>
+
+    <record id="fir_catalog_sale_act_window" model="ir.actions.act_window">
+        <field name="name">报价单管理</field>
+        <field name="res_model">catalog.sale</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{ 'search_default_stat': True}</field>
     </record>
 </odoo>

@@ -14,15 +14,22 @@
 
     'version': '13.0.1.0',
 
-    'depends': [],
+    'depends': ['base', 'mail'],
     'data': [
+        "security/ir.model.access.csv",
+        "data/data.xml",
+        "data/message.xml",
+        "reports/report.xml",
+        "reports/pick_lines.xml",
         "views/catalog_sale_view.xml",
-        "views/catalog_product_view.xml",
+        "views/catalog_purchase_view.xml",
         "views/catalog_deal_view.xml",
+        "views/catalog_picking_view.xml",
+        "views/catalog_product_view.xml",
+        "views/catalog_warehourse_view.xml",
         "views/catalog_provider_view.xml",
         "views/catalog_client_view.xml",
-        "views/catalog_deal_menu.xml",
-        "security/ir.model.access.csv"
+        "views/catalog_deal_menu.xml"
     ],
     # 'installable': True,
     'application': True,

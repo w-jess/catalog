@@ -1,6 +1,14 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_catalog_product_group_user,catalog.product,model_catalog_product,base.group_user,1,1,1,1
-access_catalog_deal_group_user,catalog.deal,model_catalog_deal,base.group_user,1,1,1,1
+access_catalog_warehourse_group_user,catalog.warehourse,model_catalog_warehourse,base.group_user,1,1,1,1
 access_catalog_provider_group_user,catalog.provider,model_catalog_provider,base.group_user,1,1,1,1
 access_catalog_client_group_user,catalog.client,model_catalog_client,base.group_user,1,1,1,1
+
+access_catalog_deal_group_user,catalog.deal,model_catalog_deal,base.group_user,1,1,1,1
+access_catalog_picking_group_user,catalog.picking,model_catalog_picking,base.group_user,1,1,1,1
+access_pick_lines_group_user,pick.lines,model_pick_lines,base.group_user,1,1,1,1
+
 access_catalog_sale_group_user,catalog.sale,model_catalog_sale,base.group_user,1,1,1,1
+access_sale_lines_group_user,sale.lines,model_sale_lines,base.group_user,1,1,1,1
+
+access_catalog_purchase_group_user,catalog.purchase,model_catalog_purchase,base.group_user,1,1,1,1

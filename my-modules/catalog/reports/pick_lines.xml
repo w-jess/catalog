@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_picking">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <div class="page">
+                    <div class="text-center">
+                        <h2>出库单#<t t-esc="doc.o_pick"/></h2>
+                    </div>
+                    <div>
+                        <div style="text-align:left;">
+                            收货人：<t t-esc="doc.company_id.partner_id"/>，<t t-esc="doc.company_id.name"/>
+                        </div>
+                        <div style="text-align:left;">
+                            地址：<t t-esc="doc.company_id.street"/>
+                        </div>
+                    </div>
+                    <div>
+                        <div style="text-align:left;">
+                            订单号：<t t-esc="doc.pick_id.o_name"/>
+                        </div>
+                        <div style="text-align:left;">
+                            安排日期：<t t-esc="doc.date"/>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <h3>产品表</h3>
+                    </div>
+                    <div class="row">
+                        <table  class="table table-condensed">
+                            <thead>
+                                <tr>
+                                    <th><strong>产品</strong></th>
+                                    <th><strong>品牌</strong></th>
+                                    <th><strong>规格</strong></th>
+                                    <th><strong>计量单位</strong></th>
+                                    <th><strong>数量</strong></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><t t-esc="doc.pack_line_ids.pick_name.sale_name.name"/></td>
+                                    <td><t t-esc="doc.pack_line_ids.pick_name.sale_name.brand"/></td>
+                                    <td><t t-esc="doc.pack_line_ids.pick_name.sale_name.spec"/></td>
+                                    <td><t t-esc="doc.pack_line_ids.pick_name.sale_name.metric"/></td>
+                                    <td><t t-esc="doc.pack_line_ids.quantity_done"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

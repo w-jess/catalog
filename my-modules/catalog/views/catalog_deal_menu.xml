@@ -1,46 +1,74 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <menuitem name="catalog" id="catalog_deal_menu_root" groups="base.group_user" sequence="2"/>
-    <menuitem name="订单管理" id="fir_catalog_deal_menu_one"
+    <menuitem name="订单" id="fir_catalog_deal_menu_one"
               parent="catalog_deal_menu_root"
-              action="catalog_sale_act_window"
+              action="fir_catalog_sale_act_window"
               sequence="5"/>
-    <menuitem name="采购订单管理" id="fir_catalog_deal_menu_two"
+    <menuitem name="采购订单" id="fir_catalog_deal_menu_two"
               parent="catalog_deal_menu_root"
               action="catalog_product_act_window"
               sequence="5"/>
-    <menuitem name="库存管理" id="sec_catalog_deal_menu"
+    <menuitem name="库存" id="sec_catalog_deal_menu"
               parent="catalog_deal_menu_root"
               sequence="6"/>
     <menuitem name="统计分析" id="third_catalog_deal_menu"
               parent="catalog_deal_menu_root"
               action=""
               sequence="8"/>
-    <menuitem name="配置" id="four_catalog_deal_menu"
+    <menuitem name="基础配置" id="four_catalog_deal_menu"
               parent="catalog_deal_menu_root"
               sequence="9"/>
 
-    <!--库存管理-->
-    <menuitem name="库存列表" id="sec_catalog_deal_menu_one"
+    <!--订单管理-->
+    <menuitem name="报价单" id="catalog_sale_menu_one"
+              parent="fir_catalog_deal_menu_one"
+              action="fir_catalog_sale_act_window"
+              sequence="10"/>
+    <menuitem name="订单" id="catalog_sale_menu_two"
+              parent="fir_catalog_deal_menu_one"
+              action="catalog_sale_act_window"
+              sequence="11"/>
+    <menuitem name="客户" id="catalog_sale_menu_tri"
+              parent="fir_catalog_deal_menu_one"
+              action="catalog_client_act_window"
+              sequence="12"/>
+
+    <!--采购订单管理-->
+    <menuitem name="询价单" id="catalog_cg_menu_one"
+              parent="fir_catalog_deal_menu_two"
+              action="catalog_purchase_act_window"
+              sequence="10"/>
+    <menuitem name="采购订单" id="catalog_cg_menu_two"
+              parent="fir_catalog_deal_menu_two"
+              action="catalog_purchase_act_window"
+              sequence="11"/>
+    <menuitem name="供应商" id="catalog_cg_menu_tri"
+              parent="fir_catalog_deal_menu_two"
+              action="catalog_provider_act_window"
+              sequence="12"/>
+
+    <!--库存-->
+    <menuitem name="库存" id="sec_catalog_deal_menu_one"
               parent="sec_catalog_deal_menu"
               action="catalog_deal_act_window"
               sequence="10"/>
-    <menuitem name="产品列表" id="sec_catalog_deal_menu_sec"
+    <menuitem name="出货单" id="sec_catalog_deal_menu_two"
               parent="sec_catalog_deal_menu"
-              action="catalog_product_act_window"
+              action="catalog_picking_act_window"
               sequence="11"/>
-    <menuitem name="出入库记录" id="sec_catalog_deal_menu_third"
+    <menuitem name="入库单" id="sec_catalog_deal_menu_third"
               parent="sec_catalog_deal_menu"
-              action=""
+              action="catalog_picking_act_window"
               sequence="12"/>
 
-    <!--设置-->
-    <menuitem name="供应商管理" id="four_catalog_deal_menu_one"
+    <!--基础配置-->
+    <menuitem name="产品" id="four_catalog_deal_menu_one"
               parent="four_catalog_deal_menu"
-              action="catalog_provider_act_window"
+              action="catalog_product_act_window"
               sequence="10"/>
-    <menuitem name="客户管理" id="four_catalog_deal_menu_sec"
+    <menuitem name="仓库" id="four_catalog_deal_menu_two"
               parent="four_catalog_deal_menu"
-              action="catalog_client_act_window"
+              action="catalog_warehourse_act_window"
               sequence="11"/>
 </odoo>

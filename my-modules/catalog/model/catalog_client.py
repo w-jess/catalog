@@ -8,3 +8,4 @@ from odoo import api,fields,models
 class CatalogClient(models.Model):
     _name = 'catalog.client'
     _inherit = 'catalog.provider'
+    _rec_name = 'name'

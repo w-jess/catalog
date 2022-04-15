@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="catalog_purchase_tree_view" model="ir.ui.view">
+        <field name="name">采购订单管理</field>
+        <field name="model">catalog.purchase</field>
+        <field name="arch" type="xml">
+            <tree string="order" >
+                <field name="o_name" string="报价单号"/>
+                <field name="com_name_id" string="供应商"/>
+                <field name="date_order" string="创建日期"/>
+                <field name="create_user_id"/>
+                <field name="state" invisible="1" string="状态"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="catalog_purchase_form_view" model="ir.ui.view">
+        <field name="name">采购订单管理</field>
+        <field name="model">catalog.purchase</field>
+        <field name="arch" type="xml">
+            <form string="order">
+                <header>
+                   <button name="action_confirm" id="action_confirm"
+                        string="确认" class="btn-primary" type="object"
+                        attrs="{'invisible': [('state', 'not in', ['sent'])]}"/>
+                    <button name="action_confirm"
+                        string="确认" type="object"
+                        attrs="{'invisible': [('state', 'not in', ['draft'])]}"/>
+                    <button name="action_cancel" states="draft,sent,purchase" type="object" string="取消"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,sent,purchase"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="o_name" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="com_name_id"/>
+                        </group>
+                        <group>
+                            <field name="date_order"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="订单行" name="order_lines">
+                            <!--<field name="sale_line_ids">-->
+                                <!--<tree editable="bottom">-->
+                                    <!--<field name="sale_name"/>-->
+                                    <!--<field name="quantity"/>-->
+                                    <!--<field name="unit"/>-->
+                                    <!--<field name="total"/>-->
+                                <!--</tree>-->
+                            <!--</field>-->
+                        </page>
+                        <page string="可选产品" name="optional_products">
+				                <!--<field name="sale_line_ids" mode="tree,form,kanban"/>-->
+			            </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="catalog_purchase_act_window" model="ir.actions.act_window">
+        <field name="name">采购订单管理</field>
+        <field name="res_model">catalog.purchase</field>
+        <field name="view_mode">tree,form,kanban</field>
+    </record>
+</odoo>

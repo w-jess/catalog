@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <report
+            id="report_pick_line"
+            string="出货单"
+            model="catalog.picking"
+            report_type="qweb-pdf"
+            name="catalog.report_picking"
+            file="catalog.report_picking"/>
+
+</odoo>

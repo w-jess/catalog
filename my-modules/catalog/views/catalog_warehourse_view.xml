@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="catalog_warehourse_kanban_view" model="ir.ui.view">
+        <field name="name">仓库管理</field>
+        <field name="model">catalog.warehourse</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="ware"/>
+                <field name="abbr"/>
+                <field name="site"/>
+                <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_global_click">
+                                <div class="oe_kanban_details">
+                                    <div class="o_kanban_record_top">
+                                        <strong><field name="ware"/></strong>
+                                    </div>
+                                    <div class="o_kanban_record_bottom">
+                                        <div class="oe_kanban_bottom_left text-muted">
+                                            <field name="abbr"/>
+                                        </div>
+                                        <div class="oe_kanban_bottom_right">
+                                            <field name="site"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="catalog_warehourse_tree_view" model="ir.ui.view">
+        <field name="name">仓库管理</field>
+        <field name="model">catalog.warehourse</field>
+        <field name="arch" type="xml">
+            <tree string="warehourse">
+                <field name="ware"/>
+                <field name="abbr"/>
+                <field name="site"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="catalog_warehourse_form_view" model="ir.ui.view">
+        <field name="name">仓库管理</field>
+        <field name="model">catalog.warehourse</field>
+        <field name="arch" type="xml">
+                <form string="warehourse">
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="ware" class="oe_edit_only"/>
+                            <h1>
+                                <field name="ware"/>
+                            </h1>
+                        </div>
+                           <group>
+                               <group>
+                                   <field name="abbr"/>
+                               </group>
+                               <group>
+                                   <field name="site"/>
+                               </group>
+                           </group>
+                    </sheet>
+                </form>
+        </field>
+    </record>
+
+    <record id="catalog_warehourse_act_window" model="ir.actions.act_window">
+        <field name="name">仓库管理</field>
+        <field name="res_model">catalog.warehourse</field>
+        <field name="view_mode">kanban,tree,form</field>
+    </record>
+</odoo>
